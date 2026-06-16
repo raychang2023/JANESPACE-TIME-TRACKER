@@ -44,6 +44,13 @@ function distanceDisplay(record) {
   return parts.join(" / ");
 }
 
+function warehouseDisplay(record) {
+  const values = [];
+  if (record.clockInWarehouseName) values.push(`In: ${record.clockInWarehouseName}`);
+  if (record.clockOutWarehouseName) values.push(`Out: ${record.clockOutWarehouseName}`);
+  return values.join(" / ");
+}
+
 export default function TimeRecordsPage() {
   const [employees, setEmployees] = useState([]);
   const [records, setRecords] = useState([]);
@@ -205,6 +212,7 @@ export default function TimeRecordsPage() {
                 <th>Clock Out</th>
                 <th>Hours</th>
                 <th>Site Distance</th>
+                <th>Warehouse</th>
                 <th>Source</th>
                 <th>Note</th>
                 <th>Actions</th>
@@ -220,6 +228,7 @@ export default function TimeRecordsPage() {
                   <td>{record.clockOutAt ? sydneyDisplay(record.clockOutAt) : <span className="status open">Open</span>}</td>
                   <td>{record.totalHours == null ? "" : Number(record.totalHours).toFixed(2)}</td>
                   <td>{distanceDisplay(record)}</td>
+                  <td>{warehouseDisplay(record)}</td>
                   <td>{record.source}</td>
                   <td>{record.note || ""}</td>
                   <td>

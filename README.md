@@ -70,12 +70,16 @@ For the shared onsite QR flow, workers open `/site-scan`, select their name, and
 
 ## Onsite Location Check
 
-Scan clock-in and clock-out require browser location access. The backend only accepts scan records within 150 meters of:
+Scan clock-in and clock-out require browser location access. The backend only accepts scan records within 150 meters of an approved warehouse:
 
 ```text
 24 Madden St, Aitkenvale QLD 4814
 Latitude: -19.293479
 Longitude: 146.7704773
+
+50-52 Vickers St, Edmonton QLD 4869
+Latitude: -16.998416
+Longitude: 145.7502424
 ```
 
 If location permission is denied, location fails, or the worker is outside the allowed radius, the scan action is rejected and no time record is created. Admin can manually add a record later in `/admin/time-records` with a note.

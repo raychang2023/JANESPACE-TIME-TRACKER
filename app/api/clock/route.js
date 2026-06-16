@@ -46,11 +46,13 @@ export async function POST(request) {
           clockInLongitude,
           clockInDistanceMeters,
           clockInAccuracyMeters,
+          clockInWarehouseId,
+          clockInWarehouseName,
           source,
           createdAt,
           updatedAt
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, 'scan', ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'scan', ?, ?)
       `
       )
       .run(
@@ -61,6 +63,8 @@ export async function POST(request) {
         locationCheck.coordinates.longitude,
         locationCheck.distanceMeters,
         locationCheck.coordinates.accuracy,
+        locationCheck.warehouse.id,
+        locationCheck.warehouse.label,
         now,
         now
       );
@@ -69,7 +73,8 @@ export async function POST(request) {
       recordId: result.lastInsertRowid,
       status: "Clocked In",
       todayTotalHours: getTodayTotalHours(employee.id, today),
-      distanceMeters: locationCheck.distanceMeters
+      distanceMeters: locationCheck.distanceMeters,
+      warehouse: locationCheck.warehouse
     });
   }
 
@@ -87,6 +92,8 @@ export async function POST(request) {
         clockOutLongitude = ?,
         clockOutDistanceMeters = ?,
         clockOutAccuracyMeters = ?,
+        clockOutWarehouseId = ?,
+        clockOutWarehouseName = ?,
         updatedAt = ?
     WHERE id = ?
   `
@@ -97,6 +104,8 @@ export async function POST(request) {
     locationCheck.coordinates.longitude,
     locationCheck.distanceMeters,
     locationCheck.coordinates.accuracy,
+    locationCheck.warehouse.id,
+    locationCheck.warehouse.label,
     now,
     openRecord.id
   );
@@ -106,6 +115,7 @@ export async function POST(request) {
     recordId: openRecord.id,
     status: "Completed Today",
     todayTotalHours: getTodayTotalHours(employee.id, today),
-    distanceMeters: locationCheck.distanceMeters
+    distanceMeters: locationCheck.distanceMeters,
+    warehouse: locationCheck.warehouse
   });
 }
