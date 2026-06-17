@@ -80,6 +80,10 @@ Longitude: 146.7704773
 50-52 Vickers St, Edmonton QLD 4869
 Latitude: -16.998416
 Longitude: 145.7502424
+
+11 Maisel Cl, Smithfield QLD 4878
+Latitude: -16.8217888
+Longitude: 145.6911322
 ```
 
 If location permission is denied, location fails, or the worker is outside the allowed radius, the scan action is rejected and no time record is created. Admin can manually add a record later in `/admin/time-records` with a note.
