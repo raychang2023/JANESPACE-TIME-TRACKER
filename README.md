@@ -112,12 +112,13 @@ Open records without `clockOutAt` are treated as exceptions and are not counted 
 
 Forgotten clock-outs are handled by admin correction. The open record stays uncounted until an admin confirms the actual finish time, edits `clockOutAt`, and adds a note such as `forgot clock out - confirmed by supervisor`.
 
-Completed hours are billed in 15-minute blocks with a 1-minute grace buffer:
+Completed hours are billed from the 10-minute mark, then increase every 15 minutes:
 
-- 1-16 minutes = `0.25 hrs`
-- 17-31 minutes = `0.50 hrs`
-- 32-46 minutes = `0.75 hrs`
-- 47-61 minutes = `1.00 hrs`
+- 1-9 minutes = `0.00 hrs`
+- 10-24 minutes = `0.25 hrs`
+- 25-39 minutes = `0.50 hrs`
+- 40-54 minutes = `0.75 hrs`
+- 55-69 minutes = `1.00 hrs`
 
 Existing historical records are not recalculated automatically. Edited or newly completed records use this rule.
 

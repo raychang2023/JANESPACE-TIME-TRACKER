@@ -174,7 +174,7 @@ export default function TimeRecordsPage() {
             </button>
           ) : null}
         </form>
-        <p className="muted">Hours are billed in 15-minute blocks with a 1-minute grace buffer.</p>
+        <p className="muted">Shifts under 10 minutes are not billed. Billing starts at 10 minutes, then increases every 15 minutes.</p>
         {message ? <p className="success">{message}</p> : null}
         {error ? <p className="error">{error}</p> : null}
       </section>
